@@ -17,7 +17,7 @@ int cardIndex = 0;
 //player info
 int dollar[N_MAX_USER];						//dollars that each player has
 int n_user;									//number of users
-
+int bet[N_MAX_USER];
 
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold
@@ -109,16 +109,18 @@ int mixCardTray(void) {
 int main(int argc, char *argv[]) {
 	
 	int i;
-
-	offerCards();
+	configuser();
 	
-	printf("dealer : %d %d\n", cardhold[n_user][0], cardhold[n_user][1]);
-	printf("You : %d %d\n", cardhold[0][0], cardhold[0][1]);
+	printf("bet dollars(Max %d): ",N_DOLLAR);
+	scanf("%d", &bet[0]);
 	
-	for (i=1;i<n_user;i++)
+	srand((unsigned)time(NULL));
+	for(i=1;i<n_user-1;i++)
 	{
-		printf("player[%d] : %d %d\n", i, cardhold[i][0], cardhold[i][1]);
+		bet[i] = rand()%5+1;
+		printf("player[%d] bet : %d\n", i, bet[i]);
 	}
+
 	
 	return 0;
 }
